@@ -1,0 +1,60 @@
+wandb:
+  dry_run: False
+  save_dir: /data.8tb/pm_data_classification
+  run_name: classification_test
+
+hparams:
+  batch_size: 16
+  classes: [not_pm, pm]
+  experiment_name: powderymildew_classification
+  epochs: 100
+  num_workers: 16
+  num_gpus: -1
+  optimizer: Adam
+
+  model_params:
+    model: mixnet_xl
+    num_classes: 2
+    pretrained: True
+
+  optimizer_params:
+    lr: 0.00035
+    # momentum: 0.9
+    weight_decay: 0.01
+
+  swa: 
+    swa_epoch_start: 0.75
+
+  scheduler:
+    milestones: [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    gamma: 0.1
+  
+  dataset:
+
+    train:
+      pos_tile_prob: 0.31
+      data_subset: train
+      transforms:
+        __class_fullname__: Compose 
+        additional_targets: {}
+        bbox_params: null
+        keypoint_params: null
+        p: 1
+        transforms:
+        - __class_fullname__: Rotate
+          always_apply: false
+          p: 0.5
+
+    val:
+      pos_tile_prob: 0.31
+      data_subset: validation
+      transforms:
+    
+    eval:
+      # ckpt_path: /data.8tb/pm_data_classification/weights/mixnet_xl-Adam-epoch=47-val_image_f1_score=0.769231.ckpt
+      ckpt_path: /data.8tb/pm_data_classification/weights/mixnet_xl-Adam-epoch=94-val_image_f1_score=0.800000.ckpt
+      save_dir: /data.8tb/pm_data_classification/plots/
+      batch_size: 4
+      start_interv: 0
+      end_interv: 1
+      step: 0.001
