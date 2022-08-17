@@ -1,12 +1,12 @@
 wandb:
   dry_run: False
-  save_dir: /data.8tb/pm_data_classification
+  save_dir: 
   run_name: classification_test
 
 hparams:
   batch_size: 16
   classes: [not_pm, pm]
-  experiment_name: powderymildew_classification
+  experiment_name: 
   epochs: 100
   num_workers: 16
   num_gpus: -1
@@ -51,9 +51,8 @@ hparams:
       transforms:
     
     eval:
-      # ckpt_path: /data.8tb/pm_data_classification/weights/mixnet_xl-Adam-epoch=47-val_image_f1_score=0.769231.ckpt
-      ckpt_path: /data.8tb/pm_data_classification/weights/mixnet_xl-Adam-epoch=94-val_image_f1_score=0.800000.ckpt
-      save_dir: /data.8tb/pm_data_classification/plots/
+      ckpt_path: 
+      save_dir: 
       batch_size: 4
       start_interv: 0
       end_interv: 1
